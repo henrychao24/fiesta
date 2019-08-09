@@ -1,16 +1,16 @@
 ![Tivi](https://raw.githubusercontent.com/chrisbanes/tivi/master/art/banner.png)
 
-# Tivi 📺 (work-in-progress 👷🔧️👷‍♀️⛏)
+# Fiesta 📺 (work-in-progress 👷🔧️👷‍♀️⛏)
 
 **This is not an official Google product**
 
-Tivi is a **work-in-progress** TV show tracking Android app, which connects to
+Fiesta is a **work-in-progress** TV show tracking Android app, which connects to
 [Trakt.tv](https://www.trakt.tv). It is still in its early stages of development and currently
 only contains two pieces of UI. It is under heavy development.
 
 ## Android development
 
-Tivi is an app which attempts to use the latest cutting edge libraries and tools. As a summary:
+Fiesta is an app which attempts to use the latest cutting edge libraries and tools. As a summary:
 
  * Entirely written in [Kotlin](https://kotlinlang.org/)
  * Uses [RxJava](https://github.com/ReactiveX/RxJava) 2
