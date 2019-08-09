@@ -1,11 +1,12 @@
-![Tivi](https://raw.githubusercontent.com/chrisbanes/tivi/master/art/banner.png)
+![浇花](https://user-images.githubusercontent.com/16383391/62771766-8ba01980-bad0-11e9-8d7e-c6ab18482f60.gif)     ![兔子](https://user-images.githubusercontent.com/16383391/62771778-90fd6400-bad0-11e9-9709-7958374777c5.gif)
+
+![程序员看到自己程序运行成功的那一刻](https://user-images.githubusercontent.com/16383391/62771806-a07cad00-bad0-11e9-9c8e-bcfa75be5804.gif)
 
 # Fiesta 📺 (work-in-progress 👷🔧️👷‍♀️⛏)
 
 **This is not an official Google product**
 
-Fiesta is a **work-in-progress** TV show tracking Android app, which connects to
-[Trakt.tv](https://www.trakt.tv). It is still in its early stages of development and currently
+Fiesta is a **work-in-progress** Joking Android app. It is still in its early stages of development and currently
 only contains two pieces of UI. It is under heavy development.
 
 ## Android development
@@ -28,32 +29,6 @@ the [spotless](https://github.com/diffplug/spotless) gradle plugin, and the bund
 
 If you find that one of your pull reviews does not pass the CI server check due to a code style conflict, you can
 easily fix it by running: `./gradlew spotlessApply`, or running IntelliJ/Android Studio's code formatter.
-
-### API keys
-
-You need to supply API / client keys for the various services the
-app uses. That is currently [Trakt.tv](http://docs.trakt.apiary.io/),
-[TMDb](https://developers.themoviedb.org/4/getting-started) and [Fabric](https://fabric.io) (for Crashlytics). You can find information about
-how to gain access via the relevant links.
-
-For Trakt.tv, set the redirect uri to `app.tivi://auth/oauth2callback`.
-
-When you obtain the keys, you can provide them to the app by putting the following in the
-`gradle.properties` file in your user home:
-
-```
-# Get these from Trakt.tv
-TIVI_TRAKT_CLIENT_ID=<insert>
-TIVI_TRAKT_CLIENT_SECRET=<insert>
-
-# Get this from TMDb
-TIVI_TMDB_API_KEY=<insert>
-
-# Get this from Fabric/Crashlytics
-TIVI_FABRIC_API_KEY=<insert>
-```
-
-On Linux/Mac that file is typically found at `~/.gradle/gradle.properties` or in the project directory `tivi/gradle.properties`
 
 ## Contributions
 
