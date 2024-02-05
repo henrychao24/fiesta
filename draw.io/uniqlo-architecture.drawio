@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2024-02-04T09:40:47.324Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36" etag="RYePVqPXp17eUlHh4FZu" version="23.1.1" type="github">
+<mxfile host="app.diagrams.net" modified="2024-02-05T07:16:06.305Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36" etag="CBDoxiWYFpduv_FWIwzi" version="23.1.1" type="github">
   <diagram name="第 1 页" id="FLTHROz806pXhNOoG-_p">
     <mxGraphModel dx="1434" dy="669" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
       <root>
@@ -49,10 +49,10 @@
         <mxCell id="QxlbDSGQccoswhp-1WiE-26" value="/store-o2o/v1/uq/jp/smart-locker/api (HMAC Auth)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="540" y="206" width="290" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="QxlbDSGQccoswhp-1WiE-27" value="/store-o2o/v1/uq/jp/smart-locker/addapi (Azure Auth)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+        <mxCell id="QxlbDSGQccoswhp-1WiE-27" value="/store-o2o/v1/uq/jp/smart-locker/aadapi (Azure Auth)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="540" y="226" width="300" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="QxlbDSGQccoswhp-1WiE-28" value="/store-o2o/v1/uq/jp/smart-locker/admin-addapi&amp;nbsp;(Azure Auth)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+        <mxCell id="QxlbDSGQccoswhp-1WiE-28" value="/store-o2o/v1/uq/jp/smart-locker/admin-aadapi&amp;nbsp;(Azure Auth)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="540" y="246" width="340" height="20" as="geometry" />
         </mxCell>
         <mxCell id="QxlbDSGQccoswhp-1WiE-29" value="Amazon ECS" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;strokeColor=#ffffff;fillColor=#232F3E;dashed=0;verticalLabelPosition=middle;verticalAlign=bottom;align=center;html=1;whiteSpace=wrap;fontSize=10;fontStyle=1;spacing=3;shape=mxgraph.aws4.productIcon;prIcon=mxgraph.aws4.ecs;" parent="1" vertex="1">
