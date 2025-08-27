@@ -1,0 +1,107 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="data-flow" name="KDS系统数据交互流转">
+    <mxGraphModel>
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        
+        <!-- 泳道 -->
+        <mxCell id="lane-pos" value="企迈POS系统" style="swimlane" vertex="1" parent="1">
+          <mxGeometry x="0" y="0" width="240" height="1200" as="geometry"/>
+        </mxCell>
+        <mxCell id="lane-kds" value="KDS系统（核心）" style="swimlane" vertex="1" parent="1">
+          <mxGeometry x="240" y="0" width="240" height="1200" as="geometry"/>
+        </mxCell>
+        <mxCell id="lane-boh" value="BOH进销存系统" style="swimlane" vertex="1" parent="1">
+          <mxGeometry x="480" y="0" width="240" height="1200" as="geometry"/>
+        </mxCell>
+        <mxCell id="lane-hyy" value="慧运营平台" style="swimlane" vertex="1" parent="1">
+          <mxGeometry x="720" y="0" width="240" height="1200" as="geometry"/>
+        </mxCell>
+
+        <!-- 节点：POS下单 -->
+        <mxCell id="order-pos" value="客人下单\n(堂食/外卖/预约/小程序)" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="lane-pos">
+          <mxGeometry x="20" y="40" width="200" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="push-order" value="推送订单\n(实时+重试)" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="lane-pos">
+          <mxGeometry x="20" y="120" width="200" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- KDS接收订单 -->
+        <mxCell id="kds-show" value="KDS展示订单\n按岗位分屏\n预约单提前30分钟" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="lane-kds">
+          <mxGeometry x="20" y="120" width="200" height="80" as="geometry"/>
+        </mxCell>
+
+        <!-- 出餐 -->
+        <mxCell id="kds-cook" value="员工生产并点击出餐\n打印出餐小票" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="lane-kds">
+          <mxGeometry x="20" y="220" width="200" height="80" as="geometry"/>
+        </mxCell>
+
+        <!-- 退单 -->
+        <mxCell id="refund-pos" value="退单/退菜请求" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="lane-pos">
+          <mxGeometry x="20" y="320" width="200" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="kds-refund" value="KDS展示退单\n打印退单小票" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="lane-kds">
+          <mxGeometry x="20" y="320" width="200" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- BOH交互 -->
+        <mxCell id="kds-to-boh" value="推送订单信息\n(异步消息队列)" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="lane-kds">
+          <mxGeometry x="20" y="420" width="200" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="boh-receive" value="接收订单信息\n用于库存/计算" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="lane-boh">
+          <mxGeometry x="20" y="420" width="200" height="60" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="boh-change" value="门店/菜品变更\n推送至KDS" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="lane-boh">
+          <mxGeometry x="20" y="500" width="200" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="kds-sync" value="KDS同步门店/菜品主档" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="lane-kds">
+          <mxGeometry x="20" y="500" width="200" height="60" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="kds-query" value="生产预测/过期提醒\n实时查询BOH" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="lane-kds">
+          <mxGeometry x="20" y="580" width="200" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="boh-provide" value="提供查询接口" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="lane-boh">
+          <mxGeometry x="20" y="580" width="200" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- 报表 -->
+        <mxCell id="kds-report" value="记录进单/出餐时间\n生成出餐报表" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="lane-kds">
+          <mxGeometry x="20" y="680" width="200" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="report-link" value="提供报表链接" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="lane-kds">
+          <mxGeometry x="20" y="760" width="200" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="hyy-view" value="慧运营平台\n展示出餐时长报表" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="lane-hyy">
+          <mxGeometry x="20" y="760" width="200" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- 连线 -->
+        <mxCell id="edge1" edge="1" parent="1" source="order-pos" target="push-order">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge2" edge="1" parent="1" source="push-order" target="kds-show">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge3" edge="1" parent="1" source="refund-pos" target="kds-refund">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge4" edge="1" parent="1" source="kds-to-boh" target="boh-receive">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge5" edge="1" parent="1" source="boh-change" target="kds-sync">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge6" edge="1" parent="1" source="kds-query" target="boh-provide">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge7" edge="1" parent="1" source="report-link" target="hyy-view">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
