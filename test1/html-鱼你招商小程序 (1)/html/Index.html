@@ -1,0 +1,1421 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pixso HTML</title>
+  <link rel="stylesheet" href="css/font.css">
+  <script src="js/animation.js"></script>
+  <style>
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+ol,ul,menu {
+  padding-inline-start: 0;
+  list-style: none;
+}
+
+ol li::marker, ul li::before {
+  letter-spacing: 0;
+}
+
+html {
+  width: 100%;
+  height: 100%;
+}
+
+body { 
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  background-color: white;
+}
+    
+span {
+  word-break: break-word;
+}
+
+.scroll-container-0_1 {
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+}
+
+.Pixso-canvas-0_1 {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+}
+
+.Pixso-frame-1_957 {
+  width: 750px;
+  height: 1642px;
+  overflow: hidden;
+  position: relative;
+  flex-shrink: 0;
+  filter: blur(9.060933430989584px);
+  background-color: rgba(255, 255, 255, 1);
+}
+
+.Pixso-rectangle-1_958 {
+  width: 100%;
+  height: 124.73%;
+  position: absolute;
+  left: 0%;
+  right: 0%;
+  top: 0%;
+  bottom: -24.73%;
+  filter: blur(9.060933430989584px);
+  background-color: rgba(255, 255, 255, 1);
+}
+
+.Pixso-group-1_959 {
+  width: 109.33%;
+  height: 31.84%;
+  position: absolute;
+  left: 0%;
+  right: -9.33%;
+  top: -0.05%;
+  bottom: 68.21%;
+  filter: blur(6.292315165201823px);
+}
+
+.Pixso-slice-1_960 {
+  width: 91.46%;
+  height: 95.62%;
+  position: absolute;
+  left: 0%;
+  right: 8.54%;
+  top: 0%;
+  bottom: 4.38%;
+}
+
+.Pixso-vector-1_986 {
+  position: absolute;
+  inset: 0% 0% 0% 0% ;
+  background-image: url(./image/Vector_1_986.png);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+.vector-wrapper-1_986 {
+  position: absolute;
+  left: 0%;
+  right: 8.54%;
+  top: 0.17%;
+  bottom: 4.21%;
+  width: 750px;
+  height: 500px;
+}
+
+.Pixso-rectangle-1_1007 {
+  width: 100%;
+  height: 13.77%;
+  position: absolute;
+  left: 0%;
+  right: 0%;
+  top: 29.29%;
+  bottom: 56.94%;
+  border-radius: 15px 15px 15px 15px;
+  filter: blur(9.060933430989584px);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-position: center;
+  background-image: url("data:image/png;base64,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");
+}
+
+.Pixso-group-1_1008 {
+  width: 23.2%;
+  height: 3.9%;
+  position: absolute;
+  left: 74.93%;
+  right: 1.87%;
+  top: 5.36%;
+  bottom: 90.74%;
+  filter: blur(9.060933430989584px);
+}
+
+.Pixso-rectangle-1_1009 {
+  width: 0.57%;
+  height: 56.25%;
+  position: absolute;
+  left: 50%;
+  right: 49.43%;
+  top: 20.31%;
+  bottom: 23.44%;
+  filter: blur(9.060933430989584px);
+  background-color: rgba(232, 232, 232, 1);
+  opacity: 0.6000000238418579;
+}
+
+.Pixso-rectangle-1_1010 {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0%;
+  right: 0%;
+  top: 0%;
+  bottom: 0%;
+  border-radius: 32px 32px 32px 32px;
+  filter: blur(9.060933430989584px);
+  background-color: rgba(255, 255, 255, 1);
+  opacity: 0.6000000238418579;
+}
+
+.Pixso-vector-1_1011 {
+  position: absolute;
+  inset: 0% 0% 0% 0% ;
+  background-image: url(./image/Ellipse_1_1011.png);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+.vector-wrapper-1_1011 {
+  position: absolute;
+  left: 65.52%;
+  right: 14.94%;
+  top: 23.44%;
+  bottom: 23.44%;
+  width: 34px;
+  height: 34px;
+}
+
+.Pixso-vector-1_1012 {
+  position: absolute;
+  inset: 0% 0% 0% 0% ;
+  background-image: url(./image/Ellipse_1_1012.png);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+.vector-wrapper-1_1012 {
+  position: absolute;
+  left: 71.84%;
+  right: 21.26%;
+  top: 40.63%;
+  bottom: 40.63%;
+  width: 12px;
+  height: 12px;
+}
+
+.Pixso-vector-1_1013 {
+  position: absolute;
+  inset: 0% 0% 0% 0% ;
+  background-image: url(./image/Ellipse_1_1013.png);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+.vector-wrapper-1_1013 {
+  position: absolute;
+  left: 22.41%;
+  right: 69.54%;
+  top: 40.63%;
+  bottom: 37.5%;
+  width: 14px;
+  height: 14px;
+}
+
+.Pixso-vector-1_1014 {
+  position: absolute;
+  inset: 0% 0% 0% 0% ;
+  background-image: url(./image/Ellipse_1_1014.png);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+.vector-wrapper-1_1014 {
+  position: absolute;
+  left: 32.18%;
+  right: 63.22%;
+  top: 45.31%;
+  bottom: 42.19%;
+  width: 8px;
+  height: 8px;
+}
+
+.Pixso-vector-1_1015 {
+  position: absolute;
+  inset: 0% 0% 0% 0% ;
+  background-image: url(./image/Ellipse_1_1015.png);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+.vector-wrapper-1_1015 {
+  position: absolute;
+  left: 15.52%;
+  right: 79.89%;
+  top: 45.31%;
+  bottom: 42.19%;
+  width: 8px;
+  height: 8px;
+}
+
+.Pixso-group-1_1016 {
+  width: 79.6%;
+  height: 2.94%;
+  position: absolute;
+  left: 10.13%;
+  right: 10.27%;
+  top: 1.33%;
+  bottom: 95.73%;
+  filter: blur(8.517277399698893px);
+}
+
+.Pixso-group-1_1017 {
+  width: 24.92%;
+  height: 48.75%;
+  position: absolute;
+  left: 75.08%;
+  right: 0%;
+  top: 27.52%;
+  bottom: 23.73%;
+  filter: blur(10.31655248006185px);
+}
+
+.Pixso-group-1_1018 {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0%;
+  right: 0%;
+  top: 0%;
+  bottom: 0%;
+  filter: blur(20.6331049601237px);
+}
+
+.Pixso-group-1_1019 {
+  width: 52.37445068359375px;
+  height: 23.5px;
+  position: absolute;
+  right: 0.00000762939453125px;
+  top: 50%;
+  transform: translateY(calc(-50% + 0.0012776395305991173px));
+  filter: blur(20.6331049601237px);
+}
+
+.Pixso-group-1_1020 {
+  width: 52.37445068359375px;
+  height: 23.5px;
+  position: absolute;
+  right: 0px;
+  top: 50%;
+  transform: translateY(calc(-50% + 0px));
+  filter: blur(20.6331049601237px);
+}
+
+.Pixso-vector-1_1021 {
+  position: absolute;
+  inset: -0.00008401322237988737% 0% 0.00008401322237988737% 0% ;
+  background-image: url(./image/Group_1_1021.png);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+.vector-wrapper-1_1021 {
+  position: absolute;
+  right: 0px;
+  top: 50%;
+  transform: translateY(calc(-50% + 0px));
+  width: 52.37445068359375px;
+  height: 23.5px;
+}
+
+.Pixso-vector-1_1027 {
+  position: absolute;
+  inset: -4.3757659883419% -1.2910417726698473% 0.0001926487901991017% 0.000009329212806620905% ;
+  background-image: url(./image/Group_1_1027.png);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+.vector-wrapper-1_1027 {
+  position: absolute;
+  left: 0px;
+  top: 50%;
+  transform: translateY(calc(-50% + -0.3655271530151367px));
+  width: 81.77961730957031px;
+  height: 22.771499633789062px;
+}
+
+.Pixso-paragraph-1_1040 {
+  font-size: 32.900001525878906px;
+  font-family: "PingFang SC-Medium";
+  font-weight: Medium;
+  color: rgba(5, 3, 4, 1);
+  width: auto;
+  height: auto;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translateX(calc(-50% + -266.50146484375px)) translateY(calc(-50% + 1.1069114208221436px));
+  white-space: pre;
+  flex-grow: 0;
+  filter: blur(10.114267349243164px);
+}
+
+.Pixso-paragraph-1_1041 {
+  font-size: 31.959999084472656px;
+  font-family: "PingFang SC-Semibold";
+  font-weight: Semibold;
+  color: rgba(5, 3, 4, 1);
+  width: auto;
+  height: auto;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translateX(calc(-50% + -273.4165096282959px)) translateY(calc(-50% + -1.606912612915039px));
+  white-space: pre;
+  flex-grow: 0;
+  filter: blur(10.114267349243164px);
+}
+
+.Pixso-vector-1_1042 {
+  position: absolute;
+  inset: 0% 0% 0% 0% ;
+  background-image: url(./image/Vector_1_1042.png);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+.vector-wrapper-1_1042 {
+  position: absolute;
+  left: 3.2%;
+  right: 3.2%;
+  top: 30.76%;
+  bottom: 60.96%;
+  width: 702px;
+  height: 136px;
+}
+
+.Pixso-group-1_1043 {
+  width: 6.4%;
+  height: 2.93%;
+  position: absolute;
+  left: 9.07%;
+  right: 84.53%;
+  top: 33.43%;
+  bottom: 63.64%;
+  filter: blur(8.154840469360352px);
+}
+
+.Pixso-vector-1_1044 {
+  position: absolute;
+  inset: 0% 0% 0% 0% ;
+  background-image: url(./image/Ellipse_1_1044.png);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+.vector-wrapper-1_1044 {
+  position: absolute;
+  left: 0%;
+  right: 0%;
+  top: 0%;
+  bottom: 0%;
+  width: 48px;
+  height: 48px;
+}
+
+.Pixso-paragraph-1_1045 {
+  font-size: 32px;
+  font-family: "PingFang SC-Semibold";
+  font-weight: Semibold;
+  color: rgba(255, 255, 255, 1);
+  width: auto;
+  height: auto;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translateX(calc(-50% + 0px)) translateY(calc(-50% + -0.5px));
+  white-space: pre;
+  flex-grow: 0;
+  filter: blur(10.148245493570963px);
+}
+
+.Pixso-group-1_1046 {
+  width: 35.46%;
+  height: 5.11%;
+  position: absolute;
+  left: 19.47%;
+  right: 45.07%;
+  top: 32.34%;
+  bottom: 62.55%;
+  filter: blur(9.060933430989584px);
+}
+
+.Pixso-paragraph-1_1047 {
+  font-size: 38px;
+  font-family: "PingFang SC-Medium";
+  font-weight: Medium;
+  line-height: 38px;
+  color: rgba(255, 107, 18, 1);
+  width: auto;
+  height: auto;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translateX(calc(-50% + 0px)) translateY(calc(-50% + -23px));
+  white-space: pre;
+  flex-grow: 0;
+  filter: blur(9.060933430989584px);
+}
+
+.Pixso-paragraph-1_1048 {
+  font-size: 24px;
+  font-family: "PingFang SC-Regular";
+  font-weight: Regular;
+  color: rgba(255, 107, 18, 1);
+  width: auto;
+  height: auto;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translateX(calc(-50% + -1px)) translateY(calc(-50% + 25.5px));
+  white-space: pre;
+  flex-grow: 0;
+  filter: blur(9.060933430989584px);
+}
+
+.Pixso-rectangle-1_1049 {
+  width: 21.33%;
+  height: 4.14%;
+  position: absolute;
+  left: 69.6%;
+  right: 9.07%;
+  top: 32.83%;
+  bottom: 63.03%;
+  border-radius: 10px 10px 10px 10px;
+  filter: blur(9.060933430989584px);
+  background-color: rgba(255, 107, 18, 1);
+}
+
+.Pixso-paragraph-1_1050 {
+  font-size: 30px;
+  font-family: "PingFang SC-Regular";
+  font-weight: Regular;
+  color: rgba(255, 255, 255, 1);
+  width: auto;
+  height: auto;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translateX(calc(-50% + 227px)) translateY(calc(-50% + -248px));
+  white-space: pre;
+  flex-grow: 0;
+  filter: blur(9.060933430989584px);
+}
+
+.Pixso-vector-1_1051 {
+  position: absolute;
+  inset: 0% 0% 0% 0% ;
+  background-image: url(./image/Vector_1_1051.png);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+.vector-wrapper-1_1051 {
+  position: absolute;
+  left: 3.2%;
+  right: 3.2%;
+  top: 42.33%;
+  bottom: 49.39%;
+  width: 702px;
+  height: 136px;
+}
+
+.Pixso-vector-1_1052 {
+  position: absolute;
+  inset: 0% 0% 0% 0% ;
+  background-image: url(./image/Vector_1_1052.png);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+.vector-wrapper-1_1052 {
+  position: absolute;
+  left: 3.2%;
+  right: 3.2%;
+  top: 53.9%;
+  bottom: 37.82%;
+  width: 702px;
+  height: 136px;
+}
+
+.Pixso-vector-1_1053 {
+  position: absolute;
+  inset: 0% 0% 0% 0% ;
+  background-image: url(./image/Vector_1_1053.png);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+.vector-wrapper-1_1053 {
+  position: absolute;
+  left: 3.2%;
+  right: 3.2%;
+  top: 65.47%;
+  bottom: 26.25%;
+  width: 702px;
+  height: 136px;
+}
+
+.Pixso-paragraph-1_1054 {
+  font-size: 38px;
+  font-family: "PingFang SC-Medium";
+  font-weight: Medium;
+  line-height: 38px;
+  color: rgba(255, 107, 18, 1);
+  width: auto;
+  height: auto;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translateX(calc(-50% + -118px)) translateY(calc(-50% + 322px));
+  white-space: pre;
+  flex-grow: 0;
+  filter: blur(9.060933430989584px);
+}
+
+.Pixso-vector-1_1055 {
+  position: absolute;
+  inset: 0% 0% 0% 0% ;
+  background-image: url(./image/Ellipse_1_1055.png);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+.vector-wrapper-1_1055 {
+  position: absolute;
+  left: 8.8%;
+  right: 84.27%;
+  top: 44.88%;
+  bottom: 51.95%;
+  width: 52px;
+  height: 52px;
+}
+
+.Pixso-vector-1_1056 {
+  position: absolute;
+  inset: 0% 0% 0% 0% ;
+  background-image: url(./image/Ellipse_1_1056.png);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+.vector-wrapper-1_1056 {
+  position: absolute;
+  left: 8.8%;
+  right: 84.27%;
+  top: 56.46%;
+  bottom: 40.38%;
+  width: 52px;
+  height: 52px;
+}
+
+.Pixso-vector-1_1057 {
+  position: absolute;
+  inset: 0% 0% 0% 0% ;
+  background-image: url(./image/Ellipse_1_1057.png);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+.vector-wrapper-1_1057 {
+  position: absolute;
+  left: 8.8%;
+  right: 84.27%;
+  top: 68.03%;
+  bottom: 28.81%;
+  width: 52px;
+  height: 52px;
+}
+
+.Pixso-paragraph-1_1058 {
+  font-size: 32px;
+  font-family: "PingFang SC-Semibold";
+  font-weight: Semibold;
+  color: rgba(255, 107, 18, 1);
+  width: auto;
+  height: auto;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translateX(calc(-50% + -282px)) translateY(calc(-50% + -57.5px));
+  white-space: pre;
+  flex-grow: 0;
+  filter: blur(10.148245493570963px);
+}
+
+.Pixso-paragraph-1_1059 {
+  font-size: 32px;
+  font-family: "PingFang SC-Semibold";
+  font-weight: Semibold;
+  color: rgba(255, 107, 18, 1);
+  width: auto;
+  height: auto;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translateX(calc(-50% + -282px)) translateY(calc(-50% + 132.5px));
+  white-space: pre;
+  flex-grow: 0;
+  filter: blur(10.148245493570963px);
+}
+
+.Pixso-paragraph-1_1060 {
+  font-size: 32px;
+  font-family: "PingFang SC-Semibold";
+  font-weight: Semibold;
+  color: rgba(255, 107, 18, 1);
+  width: auto;
+  height: auto;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translateX(calc(-50% + -282px)) translateY(calc(-50% + 322.5px));
+  white-space: pre;
+  flex-grow: 0;
+  filter: blur(10.148245493570963px);
+}
+
+.Pixso-group-1_1061 {
+  width: 35.2%;
+  height: 5.12%;
+  position: absolute;
+  left: 19.33%;
+  right: 45.47%;
+  top: 43.91%;
+  bottom: 50.97%;
+  filter: blur(9.060933430989584px);
+}
+
+.Pixso-paragraph-1_1062 {
+  font-size: 38px;
+  font-family: "PingFang SC-Medium";
+  font-weight: Medium;
+  line-height: 38px;
+  color: rgba(255, 107, 18, 1);
+  width: auto;
+  height: auto;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translateX(calc(-50% + -56px)) translateY(calc(-50% + -23px));
+  white-space: pre;
+  flex-grow: 0;
+  filter: blur(9.060933430989584px);
+}
+
+.Pixso-paragraph-1_1063 {
+  font-size: 24px;
+  font-family: "PingFang SC-Regular";
+  font-weight: Regular;
+  color: rgba(255, 107, 18, 1);
+  width: auto;
+  height: auto;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translateX(calc(-50% + 0px)) translateY(calc(-50% + 25.5px));
+  white-space: pre;
+  flex-grow: 0;
+  filter: blur(9.060933430989584px);
+}
+
+.Pixso-paragraph-1_1064 {
+  font-size: 38px;
+  font-family: "PingFang SC-Medium";
+  font-weight: Medium;
+  line-height: 38px;
+  color: rgba(255, 107, 18, 1);
+  width: auto;
+  height: auto;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translateX(calc(-50% + -97px)) translateY(calc(-50% + 132px));
+  white-space: pre;
+  flex-grow: 0;
+  filter: blur(9.060933430989584px);
+}
+
+.Pixso-group-1_1065 {
+  width: 100%;
+  height: 9.93%;
+  position: absolute;
+  left: 0%;
+  right: 0%;
+  top: 90.07%;
+  bottom: 0%;
+  filter: blur(9.060933430989584px);
+}
+
+.Pixso-rectangle-1_1066 {
+  width: 100%;
+  height: 60.12%;
+  position: absolute;
+  left: 0%;
+  right: 0%;
+  top: 0%;
+  bottom: 39.88%;
+  box-shadow: 0px -2px 20px 0px rgba(0, 0, 0, 0.0784313725490196) ;
+  filter: blur(9.060933430989584px);
+  background-color: rgba(254, 254, 254, 1);
+}
+
+.Pixso-group-1_1067 {
+  width: 100%;
+  height: 40.49%;
+  position: absolute;
+  left: 0%;
+  right: 0%;
+  top: 59.51%;
+  bottom: 0%;
+  filter: blur(9.060933430989584px);
+}
+
+.Pixso-rectangle-1_1068 {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0%;
+  right: 0%;
+  top: 0%;
+  bottom: 0%;
+  filter: blur(9.060933430989584px);
+  background-color: rgba(255, 255, 255, 1);
+}
+
+.Pixso-frame-1_1069 {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0%;
+  right: 0%;
+  top: 0%;
+  bottom: 0%;
+  filter: blur(18.121866861979168px);
+  mix-blend-mode: normal;
+}
+
+.Pixso-rectangle-3_4 {
+  width: 264px;
+  height: 8px;
+  position: absolute;
+  left: 50%;
+  bottom: 20px;
+  transform: translateX(calc(-50% + 1px));
+  border-radius: 200px 200px 200px 200px;
+  filter: blur(18.121866861979168px);
+  background-color: rgba(0, 0, 0, 1);
+  mix-blend-mode: normal;
+}
+
+.Pixso-group-1_1070 {
+  width: 6.4%;
+  height: 45.41%;
+  position: absolute;
+  left: 84.27%;
+  right: 9.33%;
+  top: 6.75%;
+  bottom: 47.84%;
+  filter: blur(8.336058934529623px);
+}
+
+.Pixso-slice-1_1071 {
+  width: 100%;
+  height: 64.45%;
+  position: absolute;
+  left: 0%;
+  right: 0%;
+  top: 0%;
+  bottom: 35.55%;
+}
+
+.Pixso-group-1_1072 {
+  width: 67.31%;
+  height: 50.81%;
+  position: absolute;
+  left: 17.31%;
+  right: 15.38%;
+  top: 7.44%;
+  bottom: 41.75%;
+  filter: blur(7.7406260172526045px);
+}
+
+.Pixso-vector-1_1073 {
+  position: absolute;
+  inset: 0.000025741339862481182% 0.000043142410335402905% 0.00001716089324165412% -0.00000862848206708058% ;
+  background-image: url(./image/Ellipse_1_1073.png);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+.vector-wrapper-1_1073 {
+  position: absolute;
+  left: 15.79%;
+  right: 15.79%;
+  top: 0%;
+  bottom: 40.91%;
+  width: 22.105262756347656px;
+  height: 22.229013442993164px;
+}
+
+.Pixso-vector-1_1074 {
+  position: absolute;
+  inset: -16.84350439970338% -24.412562941484868% -16.8430758366451% -24.413477797277313% ;
+  background-image: url(./image/Vector_1_1074.png);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+.vector-wrapper-1_1074 {
+  position: absolute;
+  left: 42.09%;
+  right: 39.91%;
+  top: 31.85%;
+  bottom: 51.09%;
+  width: 5.814406394958496px;
+  height: 6.41727876663208px;
+}
+
+.Pixso-rectangle-1_1075 {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  border-radius: 7.688571453094482px 7.688571453094482px 2.562857151031494px 2.562857151031494px;
+  filter: blur(7.7406260172526045px);
+  background-color: transparent;
+}
+
+.stroke-wrapper-1_1075 {
+  position: absolute;
+  left: 0%;
+  top: 63.64%;
+  right: 0%;
+  bottom: 0%;
+  width: 100%;
+  height: 36.36%;
+}
+
+.stroke-1_1075 {
+  position: absolute;
+  inset: 0px;
+  border-radius: 7.688571453094482px 7.688571453094482px 2.562857151031494px 2.562857151031494px;
+  border-width: 2.5999999046325684px;
+  border-style: solid;
+  pointer-events: none;
+  box-sizing: border-box;
+  border-color: rgba(153, 153, 153, 1);
+}
+
+.Pixso-paragraph-1_1076 {
+  font-size: 18.399999618530273px;
+  font-family: "PingFang SC-Regular";
+  font-weight: Regular;
+  text-align: center;
+  line-height: 18.399999618530273px;
+  color: rgba(153, 153, 153, 1);
+  width: auto;
+  height: auto;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translateX(calc(-50% + 0px)) translateY(calc(-50% + 27.512805938720703px));
+  white-space: pre;
+  flex-grow: 0;
+  filter: blur(8.336058934529623px);
+}
+
+.Pixso-group-1_1077 {
+  width: 6.38%;
+  height: 45.04%;
+  position: absolute;
+  left: 34.27%;
+  right: 59.35%;
+  top: 6.75%;
+  bottom: 48.21%;
+  filter: blur(8.336058934529623px);
+}
+
+.Pixso-slice-1_1078 {
+  width: 100%;
+  height: 64.98%;
+  position: absolute;
+  left: 0%;
+  right: 0%;
+  top: 0%;
+  bottom: 35.02%;
+}
+
+.Pixso-paragraph-1_1079 {
+  font-size: 18px;
+  font-family: "PingFang-SC-Bold";
+  font-weight: SC-Bold;
+  text-align: center;
+  line-height: 18px;
+  color: rgba(255, 107, 18, 1);
+  width: auto;
+  height: auto;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translateX(calc(-50% + 0px)) translateY(calc(-50% + 27.71280288696289px));
+  white-space: pre;
+  flex-grow: 0;
+  filter: blur(8.336058934529623px);
+}
+
+.Pixso-group-1_1080 {
+  width: 6.38%;
+  height: 45.04%;
+  position: absolute;
+  left: 59.33%;
+  right: 34.29%;
+  top: 6.75%;
+  bottom: 48.21%;
+  filter: blur(8.336058934529623px);
+}
+
+.Pixso-group-1_1081 {
+  width: 100%;
+  height: 64.98%;
+  position: absolute;
+  left: 0%;
+  right: 0%;
+  top: 0%;
+  bottom: 35.02%;
+  filter: blur(9.060933430989584px);
+}
+
+.Pixso-slice-1_1082 {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0%;
+  right: 0%;
+  top: 0%;
+  bottom: 0%;
+}
+
+.Pixso-vector-1_1083 {
+  position: absolute;
+  inset: 0% -3.8235383875229783% -3.5377296241554057% -3.8235383875229783% ;
+  background-image: url(./image/Group_1_1083.png);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+.vector-wrapper-1_1083 {
+  position: absolute;
+  left: 14.63%;
+  right: 14.3%;
+  top: 12.58%;
+  bottom: 9.87%;
+  width: 34px;
+  height: 37px;
+}
+
+.Pixso-paragraph-1_1087 {
+  font-size: 18px;
+  font-family: "PingFang SC-Regular";
+  font-weight: Regular;
+  text-align: center;
+  line-height: 18px;
+  color: rgba(153, 153, 153, 1);
+  width: auto;
+  height: auto;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translateX(calc(-50% + 0px)) translateY(calc(-50% + 27.71280288696289px));
+  white-space: pre;
+  flex-grow: 0;
+  filter: blur(8.336058934529623px);
+}
+
+.Pixso-group-1_1114 {
+  width: 6.4%;
+  height: 45.04%;
+  position: absolute;
+  left: 9.33%;
+  right: 84.27%;
+  top: 6.75%;
+  bottom: 48.21%;
+  filter: blur(8.336058934529623px);
+}
+
+.Pixso-slice-1_1115 {
+  width: 100%;
+  height: 64.98%;
+  position: absolute;
+  left: 0%;
+  right: 0%;
+  top: 0%;
+  bottom: 35.02%;
+}
+
+.Pixso-paragraph-1_1116 {
+  font-size: 18px;
+  font-family: "PingFang SC-Regular";
+  font-weight: Regular;
+  text-align: center;
+  line-height: 18px;
+  color: rgba(153, 153, 153, 1);
+  width: auto;
+  height: auto;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translateX(calc(-50% + 0px)) translateY(calc(-50% + 27.71280288696289px));
+  white-space: pre;
+  flex-grow: 0;
+  filter: blur(8.336058934529623px);
+}
+
+.Pixso-vector-1_1117 {
+  position: absolute;
+  inset: 0.00001559106183134483% 0.000015894571940104164% -0.000005197020610448277% -0.000015894571940104164% ;
+  background-image: url(./image/Vector_1_1117.png);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+.vector-wrapper-1_1117 {
+  position: absolute;
+  left: 13.46%;
+  right: 11.54%;
+  top: 7.5%;
+  bottom: 42.52%;
+  width: 36px;
+  height: 36.700809478759766px;
+}
+
+.Pixso-group-1_1122 {
+  width: 4.8%;
+  height: 22.09%;
+  position: absolute;
+  left: 35.2%;
+  right: 60%;
+  top: 10.43%;
+  bottom: 67.48%;
+  filter: blur(9.060933430989584px);
+}
+
+.Pixso-vector-1_1123 {
+  position: absolute;
+  inset: 0% 0% 0% 0% ;
+  background-image: url(./image/Ellipse_1_1123.png);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+.vector-wrapper-1_1123 {
+  position: absolute;
+  left: 0%;
+  right: 0%;
+  top: 0%;
+  bottom: 0%;
+  width: 36px;
+  height: 36px;
+}
+
+.Pixso-rectangle-1_1124 {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  border-radius: 1.2999999523162842px 1.2999999523162842px 1.2999999523162842px 1.2999999523162842px;
+  filter: blur(9.060933430989584px);
+  background-color: transparent;
+}
+
+.stroke-wrapper-1_1124 {
+  position: absolute;
+  left: 41.67%;
+  top: 30.56%;
+  right: 51.11%;
+  bottom: 41.67%;
+  width: 7.22%;
+  height: 27.77%;
+}
+
+.stroke-1_1124 {
+  position: absolute;
+  inset: 0px;
+  border-radius: 1.2999999523162842px 1.2999999523162842px 1.2999999523162842px 1.2999999523162842px;
+  border-width: 2.5999999046325684px;
+  border-style: solid;
+  pointer-events: none;
+  box-sizing: border-box;
+  border-color: rgba(255, 255, 255, 1);
+}
+
+.Pixso-rectangle-1_1125 {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  border-radius: 1.2999999523162842px 1.2999999523162842px 1.2999999523162842px 1.2999999523162842px;
+  filter: blur(9.060933430989584px);
+  background-color: transparent;
+}
+
+.stroke-wrapper-1_1125 {
+  position: absolute;
+  left: 52.78%;
+  top: 44.44%;
+  right: 40%;
+  bottom: 25%;
+  width: 7.22%;
+  height: 30.56%;
+  transform:  rotate(-75.99999967424068deg);
+}
+
+.stroke-1_1125 {
+  position: absolute;
+  inset: 0px;
+  border-radius: 1.2999999523162842px 1.2999999523162842px 1.2999999523162842px 1.2999999523162842px;
+  border-width: 2.5999999046325684px;
+  border-style: solid;
+  pointer-events: none;
+  box-sizing: border-box;
+  border-color: rgba(255, 255, 255, 1);
+}
+
+.Pixso-vector-1_1126 {
+  position: absolute;
+  inset: 0% 0% 0% 0% ;
+  background-image: url(./image/Group_1_1126.png);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+.vector-wrapper-1_1126 {
+  position: absolute;
+  left: 46%;
+  right: 48.67%;
+  top: 40.01%;
+  bottom: 58.65%;
+  width: 40px;
+  height: 22px;
+}
+
+.Pixso-vector-1_1128 {
+  position: absolute;
+  inset: 0% 0% 0% 0% ;
+  background-image: url(./image/Group_1_1128.png);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+.vector-wrapper-1_1128 {
+  position: absolute;
+  left: 46%;
+  right: 48.67%;
+  top: 51.58%;
+  bottom: 47.08%;
+  width: 40px;
+  height: 22px;
+}
+
+.Pixso-vector-1_1130 {
+  position: absolute;
+  inset: 0% 0% 0% 0% ;
+  background-image: url(./image/Group_1_1130.png);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+.vector-wrapper-1_1130 {
+  position: absolute;
+  left: 46%;
+  right: 48.67%;
+  top: 63.15%;
+  bottom: 35.51%;
+  width: 40px;
+  height: 22px;
+}
+
+.container {
+  width: 100%;
+  height: 100%;
+}
+
+  </style>
+</head>
+<body>
+<div class="scroll-container-0_1">
+  <div id="0_1" class="Pixso-canvas-0_1">
+    <div id="1_957" class="Pixso-frame-1_957">
+      <div id="1_958" class="Pixso-rectangle-1_958"></div>
+      <div id="1_959" class="Pixso-group-1_959">
+        <div id="1_960" class="Pixso-slice-1_960"></div>
+        <div id="1_986" class="vector-wrapper-1_986">
+          <div id="1_986" class="Pixso-vector-1_986"></div>
+        </div>
+      </div>
+      <div id="1_1007" class="Pixso-rectangle-1_1007"></div>
+      <div id="1_1008" class="Pixso-group-1_1008">
+        <div id="1_1009" class="Pixso-rectangle-1_1009"></div>
+        <div id="1_1010" class="Pixso-rectangle-1_1010"></div>
+        <div id="1_1011" class="vector-wrapper-1_1011">
+          <div id="1_1011" class="Pixso-vector-1_1011"></div>
+        </div>
+        <div id="1_1012" class="vector-wrapper-1_1012">
+          <div id="1_1012" class="Pixso-vector-1_1012"></div>
+        </div>
+        <div id="1_1013" class="vector-wrapper-1_1013">
+          <div id="1_1013" class="Pixso-vector-1_1013"></div>
+        </div>
+        <div id="1_1014" class="vector-wrapper-1_1014">
+          <div id="1_1014" class="Pixso-vector-1_1014"></div>
+        </div>
+        <div id="1_1015" class="vector-wrapper-1_1015">
+          <div id="1_1015" class="Pixso-vector-1_1015"></div>
+        </div>
+      </div>
+      <div id="1_1016" class="Pixso-group-1_1016">
+        <div id="1_1017" class="Pixso-group-1_1017">
+          <div id="1_1018" class="Pixso-group-1_1018">
+            <div id="1_1019" class="Pixso-group-1_1019">
+              <div id="1_1020" class="Pixso-group-1_1020">
+                <div id="1_1021" class="vector-wrapper-1_1021">
+                  <div id="1_1021" class="Pixso-vector-1_1021"></div>
+                </div>
+              </div>
+            </div>
+            <div id="1_1027" class="vector-wrapper-1_1027">
+              <div id="1_1027" class="Pixso-vector-1_1027"></div>
+            </div>
+          </div>
+        </div>
+        <p id="1_1040" class="Pixso-paragraph-1_1040">9 41</p>
+        <p id="1_1041" class="Pixso-paragraph-1_1041">:</p>
+      </div>
+      <div id="1_1042" class="vector-wrapper-1_1042">
+        <div id="1_1042" class="Pixso-vector-1_1042"></div>
+      </div>
+      <div id="1_1043" class="Pixso-group-1_1043">
+        <div id="1_1044" class="vector-wrapper-1_1044">
+          <div id="1_1044" class="Pixso-vector-1_1044"></div>
+        </div>
+        <p id="1_1045" class="Pixso-paragraph-1_1045">1</p>
+      </div>
+      <div id="1_1046" class="Pixso-group-1_1046">
+        <p id="1_1047" class="Pixso-paragraph-1_1047">加盟商信息登记</p>
+        <p id="1_1048" class="Pixso-paragraph-1_1048">全程加密，守护隐私安全</p>
+      </div>
+      <div id="1_1049" class="Pixso-rectangle-1_1049"></div>
+      <p id="1_1050" class="Pixso-paragraph-1_1050">去登记</p>
+      <div id="1_1051" class="vector-wrapper-1_1051">
+        <div id="1_1051" class="Pixso-vector-1_1051"></div>
+      </div>
+      <div id="1_1052" class="vector-wrapper-1_1052">
+        <div id="1_1052" class="Pixso-vector-1_1052"></div>
+      </div>
+      <div id="1_1053" class="vector-wrapper-1_1053">
+        <div id="1_1053" class="Pixso-vector-1_1053"></div>
+      </div>
+      <p id="1_1054" class="Pixso-paragraph-1_1054">营业全程帮扶</p>
+      <div id="1_1055" class="vector-wrapper-1_1055">
+        <div id="1_1055" class="Pixso-vector-1_1055"></div>
+      </div>
+      <div id="1_1056" class="vector-wrapper-1_1056">
+        <div id="1_1056" class="Pixso-vector-1_1056"></div>
+      </div>
+      <div id="1_1057" class="vector-wrapper-1_1057">
+        <div id="1_1057" class="Pixso-vector-1_1057"></div>
+      </div>
+      <p id="1_1058" class="Pixso-paragraph-1_1058">2</p>
+      <p id="1_1059" class="Pixso-paragraph-1_1059">3</p>
+      <p id="1_1060" class="Pixso-paragraph-1_1060">4</p>
+      <div id="1_1061" class="Pixso-group-1_1061">
+        <p id="1_1062" class="Pixso-paragraph-1_1062">总部评估</p>
+        <p id="1_1063" class="Pixso-paragraph-1_1063">线下面谈，助您区域匹配</p>
+      </div>
+      <p id="1_1064" class="Pixso-paragraph-1_1064">整店复制与培训</p>
+      <div id="1_1065" class="Pixso-group-1_1065">
+        <div id="1_1066" class="Pixso-rectangle-1_1066"></div>
+        <div id="1_1067" class="Pixso-group-1_1067">
+          <div id="1_1068" class="Pixso-rectangle-1_1068"></div>
+          <div id="1_1069" class="Pixso-frame-1_1069">
+            <div id="3_4" class="Pixso-rectangle-3_4"></div>
+          </div>
+        </div>
+        <div id="1_1070" class="Pixso-group-1_1070">
+          <div id="1_1071" class="Pixso-slice-1_1071"></div>
+          <div id="1_1072" class="Pixso-group-1_1072">
+            <div id="1_1073" class="vector-wrapper-1_1073">
+              <div id="1_1073" class="Pixso-vector-1_1073"></div>
+            </div>
+            <div id="1_1074" class="vector-wrapper-1_1074">
+              <div id="1_1074" class="Pixso-vector-1_1074"></div>
+            </div>
+            <div id="1_1075" class="stroke-wrapper-1_1075">
+              <div class="Pixso-rectangle-1_1075"></div>
+              <div class="stroke-1_1075"></div>
+            </div>
+          </div>
+          <p id="1_1076" class="Pixso-paragraph-1_1076">我的</p>
+        </div>
+        <div id="1_1077" class="Pixso-group-1_1077">
+          <div id="1_1078" class="Pixso-slice-1_1078"></div>
+          <p id="1_1079" class="Pixso-paragraph-1_1079">进度</p>
+        </div>
+        <div id="1_1080" class="Pixso-group-1_1080">
+          <div id="1_1081" class="Pixso-group-1_1081">
+            <div id="1_1082" class="Pixso-slice-1_1082"></div>
+            <div id="1_1083" class="vector-wrapper-1_1083">
+              <div id="1_1083" class="Pixso-vector-1_1083"></div>
+            </div>
+          </div>
+          <p id="1_1087" class="Pixso-paragraph-1_1087">选址</p>
+        </div>
+        <div id="1_1114" class="Pixso-group-1_1114">
+          <div id="1_1115" class="Pixso-slice-1_1115"></div>
+          <p id="1_1116" class="Pixso-paragraph-1_1116">首页</p>
+          <div id="1_1117" class="vector-wrapper-1_1117">
+            <div id="1_1117" class="Pixso-vector-1_1117"></div>
+          </div>
+        </div>
+        <div id="1_1122" class="Pixso-group-1_1122">
+          <div id="1_1123" class="vector-wrapper-1_1123">
+            <div id="1_1123" class="Pixso-vector-1_1123"></div>
+          </div>
+          <div id="1_1124" class="stroke-wrapper-1_1124">
+            <div class="Pixso-rectangle-1_1124"></div>
+            <div class="stroke-1_1124"></div>
+          </div>
+          <div id="1_1125" class="stroke-wrapper-1_1125">
+            <div class="Pixso-rectangle-1_1125"></div>
+            <div class="stroke-1_1125"></div>
+          </div>
+        </div>
+      </div>
+      <div id="1_1126" class="vector-wrapper-1_1126">
+        <div id="1_1126" class="Pixso-vector-1_1126"></div>
+      </div>
+      <div id="1_1128" class="vector-wrapper-1_1128">
+        <div id="1_1128" class="Pixso-vector-1_1128"></div>
+      </div>
+      <div id="1_1130" class="vector-wrapper-1_1130">
+        <div id="1_1130" class="Pixso-vector-1_1130"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+
+</script>
+
+</body>
+</html>
